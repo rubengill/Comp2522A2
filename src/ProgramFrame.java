@@ -1,6 +1,7 @@
 import javax.swing.*;
 
-/** Displays the window frame for the chess game
+/**
+ * Displays the window frame for the chess game
  *
  * @author rgill
  * @version 1.0
@@ -8,19 +9,25 @@ import javax.swing.*;
 public class ProgramFrame extends JFrame {
 
     /**
-     * initializes the main window, sets properties, adds board
+     * Initializes the main window, sets properties, and adds the board from the game object
+     *
+     * @param game The game object containing the board to display
      */
-    public ProgramFrame() {
+    public ProgramFrame(Game game) {
         setTitle("Chess Game");
-        // Ensure the application exits when the window is closed.
+
+        // Ensure the application exits when the window is closed
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
-        // Standard chess board size is created
-        BoardFrame boardFrame = new BoardFrame(8);
+        // Create a new BoardFrame using the board from the game object and add it to this JFrame
+        BoardFrame boardFrame = new BoardFrame(game.getBoard());
         add(boardFrame);
+
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }
 }
+
+
