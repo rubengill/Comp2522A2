@@ -7,6 +7,7 @@ import java.awt.*;
  * @version 1.0
  */
 public class BoardFrame extends JPanel {
+
     private Board board;
 
     public BoardFrame(Board board) {

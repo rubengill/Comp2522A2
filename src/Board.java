@@ -16,6 +16,9 @@ public class Board {
     /** Tile to move too */
     private Tile destinationTile;
 
+    /** Starting Tile */
+    private Tile startTile;
+
     /** Piece to move */
     private Piece selectedPiece;
 
@@ -77,6 +80,14 @@ public class Board {
     }
 
     /**
+     * Returns the destinationTile
+     * @return returns the destinationTile
+     */
+    public Tile getDestinationTile() {
+        return this.destinationTile;
+    }
+
+    /**
      * Select the piece to move
      * @param piece piece to be moved
      */
@@ -92,12 +103,10 @@ public class Board {
         return this.selectedPiece;
     }
 
-    /**
-     * Returns the destinationTile
-     * @return returns the destinationTile
-     */
-    public Tile getDestinationTile() {
-        return this.destinationTile;
+    private List<Tile> getPath(Piece piece, Tile startTile, Tile endTile) {
+
+        return null;
     }
+
 }
 
