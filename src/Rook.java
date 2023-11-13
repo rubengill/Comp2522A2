@@ -1,26 +1,16 @@
 import java.util.List;
 
 /**
- * Represents a pawn
+ * Represents a Rook
  */
-public class Pawn extends Piece {
+public class Rook extends Piece {
 
     /**
-     * Creates and sets the color for pawns
-     * @param color color of the pawns
+     * Creates and sets the color for a Rook
+     * @param color color of the Rook
      */
-    public Pawn(String color) {
+    public Rook(String color) {
         super(color);
-    }
-
-    /**
-     * Gets the symbol for a pawn
-     * @return symbol for a pawn
-     */
-    @Override
-    public String getRepresentation() {
-        return color.equals("white") ? "♙" : "♟︎";
-
     }
 
     /**
@@ -41,5 +31,14 @@ public class Pawn extends Piece {
     @Override
     public boolean canMoveThrough() {
         return false;
+    }
+
+    /**
+     * Gets the symbol of a Rook
+     * @return the symbol of a Rook
+     */
+    @Override
+    public String getRepresentation() {
+        return color.equals("white") ? "♖" : "♜";
     }
 }

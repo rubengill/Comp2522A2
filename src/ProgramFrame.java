@@ -20,8 +20,8 @@ public class ProgramFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
-        // Create a new BoardFrame using the board from the game object and add it to this JFrame
-        BoardFrame boardFrame = new BoardFrame(game.getBoard());
+        // Create a new BoardFrame using the board and players from the game object and add it to this JFrame
+        BoardFrame boardFrame = new BoardFrame(game.getBoard(), game.getPlayers());
         add(boardFrame);
 
         pack();

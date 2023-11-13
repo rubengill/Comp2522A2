@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,21 +55,19 @@ public class Board {
     }
 
     /**
-     * Returns the size of the game board
-     * @return number of tiles in the game board
+     * Set startTile
+     * @param tile tile to move too
      */
-    public int getSize() {
-        return tiles.length;
+    public void setStartTile(Tile tile) {
+        this.startTile = tile;
     }
 
     /**
-     * Gets tile at a selected position
-     * @param x tile x axis position
-     * @param y tile y axis position
-     * @return tile at x, y position
+     * Returns the startTile
+     * @return returns the startTile
      */
-    public Tile getTile(int x, int y) {
-        return tiles[x][y];
+    public Tile getStartTile() {
+        return this.startTile;
     }
 
     /**
@@ -103,10 +102,52 @@ public class Board {
         return this.selectedPiece;
     }
 
-    private List<Tile> getPath(Piece piece, Tile startTile, Tile endTile) {
-
-        return null;
+    /**
+     * Returns the size of the game board
+     * @return number of tiles in the game board
+     */
+    public int getSize() {
+        return tiles.length;
     }
 
+    /**
+     * Gets tile at a selected position
+     * @param x tile x axis position
+     * @param y tile y axis position
+     * @return tile at x, y position
+     */
+    public Tile getTile(int x, int y) {
+        return tiles[x][y];
+    }
+
+    /**
+     * Determines the path the piece wants to move
+     * @param startTile starting tile
+     * @param endTile end tile
+     * @return the path the piece wants to move
+     */
+    public List<Tile> getPath(Tile startTile, Tile endTile) {
+        List<Tile> path = new ArrayList<>();
+        path.add(startTile);
+        path.add(endTile);
+        return path;
+    }
+
+    /**
+     * Moves a piece if the move is valid
+     * @param endTile the end tile
+     */
+    public void movePiece(Tile endTile) {
+        if (this.startTile != null && this.selectedPiece != null) {
+            List<Tile> path = getPath(this.startTile, endTile);
+            if (selectedPiece.isValidMove(getPath(startTile, endTile))) {
+                endTile.setPiece(this.selectedPiece); // Move the piece
+                this.startTile.setPiece(null);       // Remove the piece from the start tile
+            }
+        }
+        // Reset startTile and selectedPiece after the move
+        this.startTile = null;
+        this.selectedPiece = null;
+    }
 }
 

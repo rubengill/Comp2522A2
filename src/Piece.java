@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Superclass for all the chess pieces
  *
@@ -6,9 +8,14 @@
  */
 public abstract class Piece {
 
+    /** The color of the piece */
     protected String color;
 
-    public Piece() {
+    /**
+     * Constructor that initializes a piece with a color
+     * @param color color of the piece
+     */
+    public Piece(String color) {
         this.color = color;
     }
 
@@ -16,7 +23,7 @@ public abstract class Piece {
      * Checks if a path is valid
      * @return true if move is valid
      */
-    public abstract boolean isValidMove();
+    public abstract boolean isValidMove(List<Tile> path);
 
     /**
      * Checks if it can move through an obstructed path
@@ -24,13 +31,27 @@ public abstract class Piece {
      */
     public abstract boolean canMoveThrough();
 
-    // Getter for color
+    /**
+     * Gets the color of the piece
+     * @return the color of the piece
+     */
     public String getColor() {
         return this.color;
     }
 
-    // Sets color
+    /**
+     * Sets the color of the piece
+     * @param color color of the piece
+     * @return color of the piece
+     */
     public String setColor(String color) {
         return this.color = color;
     }
+
+    /**
+     * The symbol of a piece
+     * @return symbol of a piece
+     */
+    public abstract String getRepresentation();
+
 }
