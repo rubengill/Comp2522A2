@@ -141,8 +141,10 @@ public class Board {
         if (this.startTile != null && this.selectedPiece != null) {
             List<Tile> path = getPath(this.startTile, endTile);
             if (selectedPiece.isValidMove(getPath(startTile, endTile))) {
-                endTile.setPiece(this.selectedPiece); // Move the piece
-                this.startTile.setPiece(null);       // Remove the piece from the start tile
+                // Move the piece
+                endTile.setPiece(this.selectedPiece);
+                // Remove the piece from the start tile
+                this.startTile.setPiece(null);
             }
         }
         // Reset startTile and selectedPiece after the move
