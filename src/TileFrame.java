@@ -16,9 +16,6 @@ public class TileFrame extends JPanel {
     private Tile tile;
     private boolean isSelected = false;
     private final BoardFrame boardFrame;
-    private int row;
-    private int col;
-
 
     /**
      * Creates a TileFrame, which will create a BoardFrame object
@@ -29,8 +26,6 @@ public class TileFrame extends JPanel {
      * @param boardFrame the BoardFrame for the tiles
      */
     public TileFrame(int row, int col, Tile tile, BoardFrame boardFrame) {
-        this.row = row;
-        this.col = col;
         this.tile = tile;
         this.boardFrame = boardFrame;
 
@@ -114,24 +109,6 @@ public class TileFrame extends JPanel {
             g2d.drawString(representation, x, y);
         }
         g2d.dispose();
-    }
-
-    /**
-     * Gets the row of the TileFrame
-     *
-     * @return row
-     */
-    public int getRow() {
-        return row;
-    }
-
-    /**
-     * Gets the col of the TileFrame
-     *
-     * @return col
-     */
-    public int getCol() {
-        return col;
     }
 
     /**

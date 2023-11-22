@@ -21,7 +21,7 @@ public class ProgramFrame extends JFrame {
         setResizable(false);
 
         // Create a new BoardFrame using the board and players from the game object and add it to this JFrame
-        BoardFrame boardFrame = new BoardFrame(game.getBoard(), game.getPlayers());
+        BoardFrame boardFrame = new BoardFrame(game.getBoard(), game.getPlayers(), game);
         add(boardFrame);
 
         pack();

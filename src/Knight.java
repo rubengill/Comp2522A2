@@ -14,13 +14,21 @@ public class Knight extends Piece {
     }
 
     /**
-     * Checks if a path is valid
+     * Validates a move
      *
-     * @return true if move is valid
+     * @param x1 x1 coordinate
+     * @param y1 y1 coordinate
+     * @param x2 x2 coordinate
+     * @param y2 y2 coordinate
+     * @return true if the move is valid
      */
     @Override
-    public boolean isValidMove(List<Tile> path) {
-        return true;
+    public boolean isValidMove(int x1, int y1, int x2, int y2) {
+        int xDiff = Math.abs(x2 - x1);
+        int yDiff = Math.abs(y2 - y1);
+
+        // Check for L-shaped movement
+        return (xDiff == 2 && yDiff == 1) || (xDiff == 1 && yDiff == 2);
     }
 
     /**
@@ -29,8 +37,8 @@ public class Knight extends Piece {
      * @return true if it can move through a piece
      */
     @Override
-    public boolean canMoveThrough() {
-        return false;
+    public boolean canMoveThrough(List<Tile> path) {
+        return true;
     }
 
     /**
@@ -40,6 +48,5 @@ public class Knight extends Piece {
     @Override
     public String getRepresentation() {
         return color.equals("white") ? "♘" : "♞";
-
     }
 }

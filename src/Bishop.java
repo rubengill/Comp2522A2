@@ -19,7 +19,7 @@ public class Bishop extends Piece {
      * @return true if move is valid
      */
     @Override
-    public boolean isValidMove(List<Tile> path) {
+    public boolean isValidMove(int x1, int y1, int x2, int y2) {
         return true;
     }
 
@@ -29,7 +29,7 @@ public class Bishop extends Piece {
      * @return true if it can move through a piece
      */
     @Override
-    public boolean canMoveThrough() {
+    public boolean canMoveThrough(List<Tile> path) {
         return false;
     }
 

@@ -12,6 +12,7 @@ public class BoardFrame extends JPanel {
     private Board board;
     private TileFrame selectedTileFrame;
     private TileFrame[][] tileFrames;
+    private Game game;
 
     /**
      * Sets up the Board based to be displayed
@@ -19,7 +20,8 @@ public class BoardFrame extends JPanel {
      * @param board the board
      * @param players the players in the game
      */
-    public BoardFrame(Board board, List<Player> players) {
+    public BoardFrame(Board board, List<Player> players, Game game) {
+        this.game = game;
         this.board = board;
         int size = board.getSize();
         setLayout(new GridLayout(size, size));
@@ -48,6 +50,7 @@ public class BoardFrame extends JPanel {
      * @param tileFrame the tile selected
      */
     public void selectTileFrame(TileFrame tileFrame) {
+
         if (selectedTileFrame != null) {
             // Selecting the destination tile
             if (selectedTileFrame == tileFrame) {
@@ -60,14 +63,13 @@ public class BoardFrame extends JPanel {
             Tile startTile = selectedTileFrame.getTile();
             Tile endTile = tileFrame.getTile();
 
-            if (startTile.isOccupied()) {
-                // Set start and destination tiles and the selected piece on the board
+            // Attempt to move the piece if it's the current player's turn
+            if (startTile.isOccupied() && game.isCurrentPlayerTurn(startTile.getPiece())) {
                 board.setStartTile(startTile);
                 board.setDestinationTile(endTile);
                 board.setSelectedPiece(startTile.getPiece());
-
-                // Then attempt to move the piece.
                 board.movePiece(endTile);
+                game.switchTurn();
             }
 
             // Deselect the tiles and repaint regardless of whether a move was made
@@ -78,7 +80,8 @@ public class BoardFrame extends JPanel {
             selectedTileFrame = null;
         } else {
             // First click on a tile
-            if (tileFrame.getTile().isOccupied()) {
+            Tile tile = tileFrame.getTile();
+            if (tile.isOccupied() && game.isCurrentPlayerTurn(tile.getPiece())) {
                 // Only select if the tile is occupied
                 selectedTileFrame = tileFrame;
                 selectedTileFrame.setSelected(true);
@@ -96,9 +99,9 @@ public class BoardFrame extends JPanel {
             List<Piece> pieces = player.getPieces();
             String color = player.getColor();
 
-            // pawns' starting row
+            // pawn starting row
             int pawnRow = color.equals("white") ? 7 : 0;
-            // other pieces' starting row
+            // other pieces starting row
             int backRow = color.equals("white") ? 6 : 1;
 
             // Place pawns
@@ -120,11 +123,11 @@ public class BoardFrame extends JPanel {
 
             // Place queen and king
             if (color.equals("white")) {
-                placePiece(pieces.get(14), backRow, 3); // Queen
-                placePiece(pieces.get(15), backRow, 4); // King
+                placePiece(pieces.get(14), backRow, 3);
+                placePiece(pieces.get(15), backRow, 4);
             } else {
-                placePiece(pieces.get(14), backRow, 4); // Queen
-                placePiece(pieces.get(15), backRow, 3); // King
+                placePiece(pieces.get(14), backRow, 4);
+                placePiece(pieces.get(15), backRow, 3);
             }
         }
     }

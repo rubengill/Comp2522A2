@@ -49,7 +49,6 @@ public class Player {
         }
     }
 
-
     /** Returns the pieces for a player */
     public List<Piece> getPieces() {
         return new ArrayList<>(pieces);

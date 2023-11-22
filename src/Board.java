@@ -124,14 +124,60 @@ public class Board {
      * Determines the path the piece wants to move
      * @param startTile starting tile
      * @param endTile end tile
-     * @return the path the piece wants to move
+     * @return list of tiles between the startTile and destinationTIle
      */
     public List<Tile> getPath(Tile startTile, Tile endTile) {
+
         List<Tile> path = new ArrayList<>();
-        path.add(startTile);
-        path.add(endTile);
+        int startX = -1;
+        int startY = -1;
+        int endX = -1;
+        int endY = -1;
+
+        // Loop to find coordinates
+        for (int x = 0; x < tiles.length; x++) {
+            for (int y = 0; y < tiles[x].length; y++) {
+                // Check if object references match
+                if (tiles[x][y] == startTile) {
+                    startX = x;
+                    startY = y;
+                }
+                if (tiles[x][y] == endTile) {
+                    endX = x;
+                    endY = y;
+                }
+            }
+        }
+
+        System.out.println("Start Tile Coordinates: x = " + startX + ", y = " + startY);
+        System.out.println("End Tile Coordinates: x = " + endX + ", y = " + endY);
+
+        // Check if coordinates were found
+        if (startX == -1 || startY == -1 || endX == -1 || endY == -1) {
+            System.out.println("Could not find the tile in the tiles array !");
+        }
+
+        // Determine the direction of movement
+        int xDirection = Integer.compare(endX, startX);
+        int yDirection = Integer.compare(endY, startY);
+
+        // Add tiles to the path
+        int x = startX;
+        int y = startY;
+        while (true) {
+            x += xDirection;
+            y += yDirection;
+
+            if (x == endX && y == endY) {
+                break;
+            }
+            System.out.println("Adding to Path: Tile at x = " + x + ", y = " + y);
+            path.add(tiles[x][y]);
+        }
+
         return path;
     }
+
 
     /**
      * Moves a piece if the move is valid
@@ -139,12 +185,39 @@ public class Board {
      */
     public void movePiece(Tile endTile) {
         if (this.startTile != null && this.selectedPiece != null) {
-            List<Tile> path = getPath(this.startTile, endTile);
-            if (selectedPiece.isValidMove(getPath(startTile, endTile))) {
+            // Find start and end coordinates
+            int startX = -1, startY = -1, endX = -1, endY = -1;
+            for (int x = 0; x < tiles.length; x++) {
+                for (int y = 0; y < tiles[x].length; y++) {
+                    if (tiles[x][y] == this.startTile) {
+                        startX = x;
+                        startY = y;
+                    }
+                    if (tiles[x][y] == endTile) {
+                        endX = x;
+                        endY = y;
+                    }
+                }
+            }
+            System.out.println("Move from (x1, y1): (" + startX + ", " + startY + ") to (x2, y2): (" + endX + ", " + endY + ")");
+
+            // Validate the move
+            if (selectedPiece.isValidMove(startX, startY, endX, endY)) {
+                // Skip path checking for Knights
+                if (!(selectedPiece instanceof Knight)) {
+                    List<Tile> path = getPath(this.startTile, endTile);
+                    if (!selectedPiece.canMoveThrough(path)) {
+                        System.out.println("Path is blocked, move not executed");
+                        return;
+                    }
+                }
+
                 // Move the piece
                 endTile.setPiece(this.selectedPiece);
-                // Remove the piece from the start tile
                 this.startTile.setPiece(null);
+                System.out.println("Executing Move");
+            } else {
+                System.out.println("Invalid Move, not executed");
             }
         }
         // Reset startTile and selectedPiece after the move

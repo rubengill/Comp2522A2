@@ -34,8 +34,27 @@ public class Game {
      * Helper method which creates the players for the game
      */
     private void initializePlayers() {
-        players.add(new Player("white"));
-        players.add(new Player("black"));
+        Player white = new Player("white");
+        Player black = new Player("black");
+        players.add(white);
+        players.add(black);
+        currentPlayer = white;
+    }
+
+    /**
+     * Switches the turn to the next player.
+     */
+    public void switchTurn() {
+        currentPlayer = (currentPlayer == players.get(0)) ? players.get(1) : players.get(0);
+    }
+
+    /**
+     * Checks if it is the current player's turn based on the piece.
+     * @param piece The piece to check.
+     * @return true if it's the current player's turn, false otherwise.
+     */
+    public boolean isCurrentPlayerTurn(Piece piece) {
+        return currentPlayer.getColor().equalsIgnoreCase(piece.getColor());
     }
 
     /**
@@ -46,6 +65,10 @@ public class Game {
         return board;
     }
 
+    /**
+     * Gets the players in the game
+     * @return the players in the game
+     */
     public List<Player> getPlayers() {
         return players;
     }
