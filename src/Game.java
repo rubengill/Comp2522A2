@@ -51,10 +51,10 @@ public class Game {
     /**
      * Checks if it is the current player's turn based on the piece.
      * @param piece The piece to check.
-     * @return true if it's the current player's turn, false otherwise.
+     * @return true if it's the current player's piece
      */
     public boolean isCurrentPlayerTurn(Piece piece) {
-        return currentPlayer.getColor().equalsIgnoreCase(piece.getColor());
+        return currentPlayer.ownsPiece(piece);
     }
 
     /**

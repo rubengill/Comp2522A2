@@ -20,7 +20,7 @@ public class Bishop extends Piece {
      */
     @Override
     public boolean isValidMove(int x1, int y1, int x2, int y2) {
-        return true;
+        return (Math.abs(x2 - x1) == Math.abs(y2 - y1));
     }
 
     /**
@@ -30,7 +30,12 @@ public class Bishop extends Piece {
      */
     @Override
     public boolean canMoveThrough(List<Tile> path) {
-        return false;
+        for (Tile tile : path) {
+            if (tile.isOccupied()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
