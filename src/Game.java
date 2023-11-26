@@ -12,7 +12,7 @@ import java.util.List;
 public class Game {
 
     /** Board the game is played on */
-    private List<Board> boards;
+    private Board board;
 
     /** Players in the game */
     private List<Player> players;
@@ -21,23 +21,13 @@ public class Game {
     private Player currentPlayer;
 
     /**
-     * Sets up a Game. Initializes players as well as
-     * the pieces on the board
+     * Sets up a Game. Initializes players and boards
      */
     public Game() {
-        this.boards = new ArrayList<>();
-        initializeBoards();
+        //Instantiate the Board (Either 2D or 3D)
+        this.board = new Board();
         this.players = new ArrayList<>();
         initializePlayers();
-    }
-
-    /**
-     * Helper method that will instantiate 3 Game Boards
-     */
-    private void initializeBoards() {
-        for (int i = 0; i < 3; i++) {
-            boards.add(new Board());
-        }
     }
 
     /**

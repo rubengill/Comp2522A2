@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /** Displays the board for the chess game
@@ -18,16 +17,14 @@ public class BoardFrame extends JPanel {
      * Sets up the Board based to be displayed
      *
      * @param board the board
-     * @param players the players in the game
      */
-    public BoardFrame(Board board, List<Player> players, Game game) {
+    public BoardFrame(Board board, Game game) {
         this.game = game;
         this.board = board;
         int size = board.getSize();
         setLayout(new GridLayout(size, size));
         tileFrames = new TileFrame[size][size];
         populateBoard();
-        initializeBoard(players);
     }
 
     /**

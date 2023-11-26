@@ -28,6 +28,9 @@ public class Player {
         initializePieces();
     }
 
+    /**
+     * Creates pieces and adds them to the players piece list
+     */
     private void initializePieces() {
         // Initialize rooks, knights, bishops
         pieces.add(new Rook(color));

@@ -38,22 +38,6 @@ public class Board {
     }
 
     /**
-     * Instantiate a board with desired width and length
-     * @param width width of the board
-     * @param height height of the board
-     */
-    public Board(int width, int height) {
-        this.tiles = new Tile[width][height];
-
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                // Initialize each tile
-                tiles[i][j] = new Tile();
-            }
-        }
-    }
-
-    /**
      * Set startTile
      * @param tile tile to move too
      */

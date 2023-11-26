@@ -29,11 +29,14 @@ public class ProgramFrame extends JFrame {
         // Create 3 BoardFrame objects using the board and players from the game object and add it to this JFrame
         for (int i = 0; i < 3; i++) {
             Board board = game.getBoard(i);
-            BoardFrame boardFrame = new BoardFrame(board, game.getPlayers(), game);
+            BoardFrame boardFrame = new BoardFrame(board, game);
+            // Add pieces to board only for the first board in the list
+            if (game.getBoard(i) == game.getBoard(0)) {
+                boardFrame.initializeBoard(game.getPlayers());
+            }
             boardFrame.setBorder(border);
             add(boardFrame);
         }
-
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
