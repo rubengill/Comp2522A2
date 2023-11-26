@@ -13,8 +13,10 @@ public class Main {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Game game = new Game();  // Initialize the game object
-                new ProgramFrame(game);  // Pass the game object to ProgramFrame to display it
+                // Initialize the game object
+                Game game = new Game();
+                // Pass the game object to ProgramFrame to display it
+                new ProgramFrame(game);
             }
         });
     }

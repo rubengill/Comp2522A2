@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 
 /**
  * Displays the window frame for the chess game
@@ -19,10 +21,18 @@ public class ProgramFrame extends JFrame {
         // Ensure the application exits when the window is closed
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+        setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
-        // Create a new BoardFrame using the board and players from the game object and add it to this JFrame
-        BoardFrame boardFrame = new BoardFrame(game.getBoard(), game.getPlayers(), game);
-        add(boardFrame);
+        // Create border between the boards
+        Border border = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+
+        // Create 3 BoardFrame objects using the board and players from the game object and add it to this JFrame
+        for (int i = 0; i < 3; i++) {
+            Board board = game.getBoard(i);
+            BoardFrame boardFrame = new BoardFrame(board, game.getPlayers(), game);
+            boardFrame.setBorder(border);
+            add(boardFrame);
+        }
 
         pack();
         setLocationRelativeTo(null);
