@@ -2,8 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents the entire game space, pieces may not occupy
- * positions that are not within the board. Board is compromised
+ * Represents the entire game space. Board is compromised
  * of Tile objects
  *
  * @author rgill
@@ -62,13 +61,13 @@ public class Board {
         this.startTile = tile;
     }
 
-    /**
-     * Returns the startTile
-     * @return returns the startTile
-     */
-    public Tile getStartTile() {
-        return this.startTile;
-    }
+//    /**
+//     * Returns the startTile
+//     * @return returns the startTile
+//     */
+//    public Tile getStartTile() {
+//        return this.startTile;
+//    }
 
     /**
      * Set destinationTile
@@ -78,13 +77,13 @@ public class Board {
         this.destinationTile = tile;
     }
 
-    /**
-     * Returns the destinationTile
-     * @return returns the destinationTile
-     */
-    public Tile getDestinationTile() {
-        return this.destinationTile;
-    }
+//    /**
+//     * Returns the destinationTile
+//     * @return returns the destinationTile
+//     */
+//    public Tile getDestinationTile() {
+//        return this.destinationTile;
+//    }
 
     /**
      * Select the piece to move
@@ -94,13 +93,13 @@ public class Board {
         this.selectedPiece = piece;
     }
 
-    /**
-     * Returns the selectedPiece
-     * @return returns the selectedPiece
-     */
-    public Piece getSelectedPiece() {
-        return this.selectedPiece;
-    }
+//    /**
+//     * Returns the selectedPiece
+//     * @return returns the selectedPiece
+//     */
+//    public Piece getSelectedPiece() {
+//        return this.selectedPiece;
+//    }
 
     /**
      * Returns the size of the game board
@@ -177,7 +176,6 @@ public class Board {
 
         return path;
     }
-
 
     /**
      * Moves a piece if the move is valid

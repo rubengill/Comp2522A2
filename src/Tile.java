@@ -60,7 +60,6 @@ public class Tile {
     public boolean isOccupied() {
         return this.piece != null;
     }
-
 }
 
 

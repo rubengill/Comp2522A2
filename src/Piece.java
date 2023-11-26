@@ -9,9 +9,9 @@ import java.util.List;
 public abstract class Piece {
 
     /** The color of the piece */
-    protected String color;
+    protected final String color;
 
-    /** Tracks if the piece is in its initial position. */
+    /** Tracks if the piece is in the initial position. */
     private boolean initialPosition;
 
     /**
@@ -40,6 +40,11 @@ public abstract class Piece {
      */
     public abstract boolean canMoveThrough(List<Tile> path);
 
+    /**
+     * The symbol of a piece
+     * @return symbol of a piece
+     */
+    public abstract String getRepresentation();
 
     /**
      * Checks if the piece is in its initial position
@@ -64,20 +69,4 @@ public abstract class Piece {
     public String getColor() {
         return this.color;
     }
-
-    /**
-     * Sets the color of the piece
-     * @param color color of the piece
-     * @return color of the piece
-     */
-    public String setColor(String color) {
-        return this.color = color;
-    }
-
-    /**
-     * The symbol of a piece
-     * @return symbol of a piece
-     */
-    public abstract String getRepresentation();
-
 }

@@ -10,10 +10,10 @@ import java.util.List;
 public class Player {
 
     /** The color of the players pieces */
-    private String color;
+    private final String color;
 
     /** ArrayList to contain pieces for the player */
-    private List<Piece> pieces = new ArrayList<>();
+    private final List<Piece> pieces = new ArrayList<>();
 
     /**
      * Sets the color for a player so all their pieces can match
