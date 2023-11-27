@@ -26,14 +26,23 @@ public class ProgramFrame extends JFrame {
         // Create border between the boards
         Border border = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 
-        // Create 3 BoardFrame objects using the board and players from the game object and add it to this JFrame
-        for (int i = 0; i < 3; i++) {
-            Board board = game.getBoard(i);
-            BoardFrame boardFrame = new BoardFrame(board, game);
-            // Add pieces to board only for the first board in the list
-            if (game.getBoard(i) == game.getBoard(0)) {
-                boardFrame.initializeBoard(game.getPlayers());
+        Board board = game.getBoard();
+        // Create the correct number of BoardFrame objects depending on the number of boards
+        if (board instanceof ChessBoard3D) {
+            ChessBoard3D chessBoard3D = (ChessBoard3D) board;
+            for (Board b : chessBoard3D.getBoardList()) {
+                BoardFrame boardFrame = new BoardFrame(b, game);
+                //Initialize fist board
+                if (b == chessBoard3D.getBoardList().get(0)) {
+                    boardFrame.initializeBoard(game.getPlayers());
+                }
+                boardFrame.setBorder(border);
+                add(boardFrame);
             }
+        } else {
+            // Set up 2D chess board
+            BoardFrame boardFrame = new BoardFrame(board, game);
+            boardFrame.initializeBoard(game.getPlayers());
             boardFrame.setBorder(border);
             add(boardFrame);
         }
@@ -44,3 +53,13 @@ public class ProgramFrame extends JFrame {
 }
 
 
+//        for (int i = 0; i < 3; i++) {
+//            Board board = game.getBoard();
+//            BoardFrame boardFrame = new BoardFrame(board, game);
+//            // Add pieces to board only for the first board in the list
+//            if (game.getBoard() == game.getBoard()) {
+//                boardFrame.initializeBoard(game.getPlayers());
+//            }
+//            boardFrame.setBorder(border);
+//            add(boardFrame);
+//        }

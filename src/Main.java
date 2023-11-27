@@ -14,7 +14,7 @@ public class Main {
             @Override
             public void run() {
                 // Initialize the game object
-                Game game = new Game();
+                Game game = new Game(true);
                 // Pass the game object to ProgramFrame to display it
                 new ProgramFrame(game);
             }

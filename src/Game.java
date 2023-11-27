@@ -15,18 +15,21 @@ public class Game {
     private Board board;
 
     /** Players in the game */
-    private List<Player> players;
+    private final List<Player> players;
 
     /** Turn of the current player */
     private Player currentPlayer;
 
     /**
-     * Sets up a Game. Initializes players and boards
+     * Sets up a 3D Chess game. Initializes players and boards
      */
-    public Game() {
-        //Instantiate the Board (Either 2D or 3D)
-        this.board = new Board();
-        this.players = new ArrayList<>();
+    public Game(boolean is3D) {
+        players = new ArrayList<>();
+        if (is3D) {
+            this.board = new ChessBoard3D();
+        } else {
+            this.board = new Board();
+        }
         initializePlayers();
     }
 
@@ -61,8 +64,8 @@ public class Game {
      * Gets the current Board
      * @return the board
      */
-    public Board getBoard(int i) {
-        return boards.get(i);
+    public Board getBoard() {
+        return board;
     }
 
     /**

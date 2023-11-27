@@ -25,32 +25,34 @@ public class Pawn extends Piece {
     @Override
     public boolean isValidMove(int x1, int y1, int x2, int y2) {
         int verticalDistance = x2 - x1;
+        int horizontalDistance = y2 - y1;
 
-        // White pawns move 'up' the board
-        if (this.color.equals("white")) {
-            // Check for the first move
-            if (isInitialPosition()) {
-                if (verticalDistance == -2 || verticalDistance == -1) {
-                    setInitialPosition(false);
-                    return true;
+        if (horizontalDistance == 0) {
+            // White pawns move 'up' the board
+            if (this.color.equals("white")) {
+                // Check for the first move
+                if (isInitialPosition()) {
+                    if (verticalDistance == -2 || verticalDistance == -1) {
+                        setInitialPosition(false);
+                        return true;
+                    }
                 }
+                // Regular move is 1 square
+                else return verticalDistance == -1;
             }
-            // Regular move is 1 square
-            else return verticalDistance == -1;
-        }
-        // Black pawns move 'down' the board
-        else if (this.color.equals("black")) {
-            // Check for the first move
-            if (isInitialPosition()) {
-                if (verticalDistance == 2 || verticalDistance == 1) {
-                    setInitialPosition(false);
-                    return true;
+            // Black pawns move 'down' the board
+            else if (this.color.equals("black")) {
+                // Check for the first move
+                if (isInitialPosition()) {
+                    if (verticalDistance == 2 || verticalDistance == 1) {
+                        setInitialPosition(false);
+                        return true;
+                    }
                 }
+                // Regular move is 1 square
+                else return verticalDistance == 1;
             }
-            // Regular move is 1 square
-            else return verticalDistance == 1;
         }
-
         return false;
     }
 

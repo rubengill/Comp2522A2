@@ -109,7 +109,7 @@ public class Board {
      * @param endTile end tile
      * @return list of tiles between the startTile and destinationTIle
      */
-    public List<Tile> getPath(Tile startTile, Tile endTile) {
+    protected List<Tile> getPath(Tile startTile, Tile endTile) {
 
         List<Tile> path = new ArrayList<>();
         int startX = -1;
@@ -147,17 +147,15 @@ public class Board {
         // Add tiles to the path
         int x = startX;
         int y = startY;
-        while (true) {
+        while (!(x == endX && y == endY)) {
+            // Move to the next tile
             x += xDirection;
             y += yDirection;
 
-            if (x == endX && y == endY) {
-                break;
-            }
+            // Add the current tile to the path
             System.out.println("Adding to Path: Tile at x = " + x + ", y = " + y);
             path.add(tiles[x][y]);
         }
-
         return path;
     }
 
@@ -165,7 +163,7 @@ public class Board {
      * Moves a piece if the move is valid
      * @param endTile the end tile
      */
-    public void movePiece(Tile endTile) {
+    protected void movePiece(Tile endTile) {
         if (this.startTile != null && this.selectedPiece != null) {
             // Find start and end coordinates
             int startX = -1, startY = -1, endX = -1, endY = -1;
