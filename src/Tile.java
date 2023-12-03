@@ -6,6 +6,9 @@
  */
 public class Tile {
 
+    /** Board level of the tile. */
+    private int level;
+
     /** Color of the tile */
     private String color;
 
@@ -15,10 +18,11 @@ public class Tile {
     /**
      * Instantiates Tile objects
      **/
-    public Tile() {
+    public Tile(int level) {
         // Default values
         this.color = null;
         this.piece = null;
+        this.level = level;
     }
 
     /**
@@ -51,6 +55,10 @@ public class Tile {
      */
     public void setPiece(Piece piece) {
         this.piece = piece;
+    }
+
+    public int getLevel() {
+        return this.level;
     }
 
     /**

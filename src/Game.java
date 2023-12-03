@@ -20,6 +20,24 @@ public class Game {
     /** Turn of the current player */
     private Player currentPlayer;
 
+    /** The start tile */
+    private Tile tileOne;
+
+    /** The start tile level */
+    private int levOne;
+
+    /** The end tile */
+    private Tile tileTwo;
+
+    /** The end tile level */
+    private int levTwo;
+
+    /** The selected tile frame */
+    private TileFrame selectedTileFrame;
+
+    /** Tile frame for the destination tile */
+    private TileFrame destinationTileFrame;
+
     /**
      * Sets up a 3D Chess game. Initializes players and boards
      */
@@ -74,5 +92,47 @@ public class Game {
      */
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public void handleTileSelection(TileFrame tileFrame) {
+        Tile selectedTile = tileFrame.getTile();
+        int selectedLevel = selectedTile.getLevel();
+
+        if (selectedTileFrame == null) {
+            // First tile selection
+            if (selectedTile.isOccupied() && isCurrentPlayerTurn(selectedTile.getPiece())) {
+                selectedTileFrame = tileFrame;
+                tileOne = selectedTile;
+                levOne = selectedLevel;
+
+                selectedTileFrame.setSelected(true);
+                selectedTileFrame.repaint();
+            }
+        } else {
+            // Second tile selection
+            destinationTileFrame = tileFrame;
+            tileTwo = selectedTile;
+            levTwo = selectedLevel;
+            movePieceBetweenBoards();
+
+            // Reset the selection
+            selectedTileFrame.setSelected(false);
+            destinationTileFrame.setSelected(false);
+            selectedTileFrame.repaint();
+            destinationTileFrame.repaint();
+            selectedTileFrame = null;
+            destinationTileFrame = null;
+        }
+    }
+
+    /**
+     * Helper method to initiate moving pieces across the boards
+     */
+    private void movePieceBetweenBoards() {
+        ChessBoard3D chessBoard3D = (ChessBoard3D) this.board;
+        chessBoard3D.movePiece(tileOne, tileTwo, levOne, levTwo);
+
+        // Switch the turn after the move
+        switchTurn();
     }
 }

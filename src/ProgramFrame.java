@@ -27,7 +27,7 @@ public class ProgramFrame extends JFrame {
         Border border = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 
         Board board = game.getBoard();
-        // Create the correct number of BoardFrame objects depending on the number of boards
+        // Create the correct number of BoardFrame objects depending on the Board type
         if (board instanceof ChessBoard3D) {
             ChessBoard3D chessBoard3D = (ChessBoard3D) board;
             for (Board b : chessBoard3D.getBoardList()) {
@@ -51,15 +51,3 @@ public class ProgramFrame extends JFrame {
         setVisible(true);
     }
 }
-
-
-//        for (int i = 0; i < 3; i++) {
-//            Board board = game.getBoard();
-//            BoardFrame boardFrame = new BoardFrame(board, game);
-//            // Add pieces to board only for the first board in the list
-//            if (game.getBoard() == game.getBoard()) {
-//                boardFrame.initializeBoard(game.getPlayers());
-//            }
-//            boardFrame.setBorder(border);
-//            add(boardFrame);
-//        }

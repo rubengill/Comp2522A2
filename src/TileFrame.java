@@ -35,6 +35,7 @@ public class TileFrame extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //System.out.println("Tile clicked at: row " + row + ", col " + col + ",Board: " + boardFrame.getBoard());
                 boardFrame.selectTileFrame(TileFrame.this);
             }
         });

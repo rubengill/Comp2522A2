@@ -24,6 +24,7 @@ public class BoardFrame extends JPanel {
         int size = board.getSize();
         setLayout(new GridLayout(size, size));
         tileFrames = new TileFrame[size][size];
+        System.out.println("Game: " + game + ",BoardFrame: " + board + ",Game Board: " + game.getBoard());
         populateBoard();
     }
 
@@ -42,49 +43,9 @@ public class BoardFrame extends JPanel {
         }
     }
 
-    /**
-     * Moves a piece if valid
-     * @param tileFrame the tile selected
-     */
+    /** Selects a tile */
     public void selectTileFrame(TileFrame tileFrame) {
-
-        if (selectedTileFrame != null) {
-            // Selecting the destination tile
-            if (selectedTileFrame == tileFrame) {
-                // The same tile was clicked twice, deselect it
-                selectedTileFrame.setSelected(false);
-                selectedTileFrame.repaint();
-                selectedTileFrame = null;
-                return;
-            }
-            Tile startTile = selectedTileFrame.getTile();
-            Tile endTile = tileFrame.getTile();
-
-            // Attempt to move the piece if it's the current player's turn
-            if (startTile.isOccupied() && game.isCurrentPlayerTurn(startTile.getPiece())) {
-                board.setStartTile(startTile);
-                board.setDestinationTile(endTile);
-                board.setSelectedPiece(startTile.getPiece());
-                board.movePiece(endTile);
-                game.switchTurn();
-            }
-
-            // Deselect the tiles and repaint regardless of whether a move was made
-            selectedTileFrame.setSelected(false);
-            tileFrame.setSelected(false);
-            selectedTileFrame.repaint();
-            tileFrame.repaint();
-            selectedTileFrame = null;
-        } else {
-            // First click on a tile
-            Tile tile = tileFrame.getTile();
-            if (tile.isOccupied() && game.isCurrentPlayerTurn(tile.getPiece())) {
-                // Only select if the tile is occupied
-                selectedTileFrame = tileFrame;
-                selectedTileFrame.setSelected(true);
-                selectedTileFrame.repaint();
-            }
-        }
+        game.handleTileSelection(tileFrame);
     }
 
     /**
@@ -139,16 +100,6 @@ public class BoardFrame extends JPanel {
     private void placePiece(Piece piece, int row, int col) {
         Tile tile = board.getTile(row, col);
         tile.setPiece(piece);
-    }
-
-    /**
-     * Getter for the TileFrame
-     * @param row the row
-     * @param col the col
-     * @return the TileFrame at a specific position
-     */
-    private TileFrame getTileFrame(int row, int col) {
-        return tileFrames[row][col];
     }
 }
 

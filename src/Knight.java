@@ -38,7 +38,8 @@ public class Knight extends Piece {
      */
     @Override
     public boolean canMoveThrough(List<Tile> path) {
-        return true;
+        Tile lastTile = path.get(path.size() - 1);
+        return !lastTile.isOccupied();
     }
 
     /**

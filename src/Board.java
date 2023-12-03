@@ -2,8 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents the entire game space. Board is compromised
- * of Tile objects
+ * Represents the entire game space. Board is compromised of Tile objects
  *
  * @author rgill
  * @version 1.0
@@ -11,28 +10,29 @@ import java.util.List;
 public class Board {
 
     /** 2D array of tiles, which together make up a board */
-    private Tile[][] tiles;
+    protected Tile[][] tiles;
 
     /** Tile to move too */
-    private Tile destinationTile;
+    protected Tile destinationTile;
 
     /** Starting Tile */
-    private Tile startTile;
+    protected Tile startTile;
 
     /** Piece to move */
-    private Piece selectedPiece;
+    protected Piece selectedPiece;
 
     /**
      * Instantiate an 8 * 8 board object
      */
     public Board() {
-        // Creates 8 * 8 array of null values
-        tiles = new Tile[8][8];
+        this(-1);
+    }
 
-        //Instantiate each element in the array
+    public Board(int level) {
+        tiles = new Tile[8][8];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                tiles[i][j] = new Tile();
+                tiles[i][j] = new Tile(level);
             }
         }
     }
@@ -45,13 +45,13 @@ public class Board {
         this.startTile = tile;
     }
 
-//    /**
-//     * Returns the startTile
-//     * @return returns the startTile
-//     */
-//    public Tile getStartTile() {
-//        return this.startTile;
-//    }
+    /**
+     * Returns the startTile
+     * @return returns the startTile
+     */
+    public Tile getStartTile() {
+        return this.startTile;
+    }
 
     /**
      * Set destinationTile
@@ -61,13 +61,13 @@ public class Board {
         this.destinationTile = tile;
     }
 
-//    /**
-//     * Returns the destinationTile
-//     * @return returns the destinationTile
-//     */
-//    public Tile getDestinationTile() {
-//        return this.destinationTile;
-//    }
+    /**
+     * Returns the destinationTile
+     * @return returns the destinationTile
+     */
+    public Tile getDestinationTile() {
+        return this.destinationTile;
+    }
 
     /**
      * Select the piece to move
@@ -77,13 +77,13 @@ public class Board {
         this.selectedPiece = piece;
     }
 
-//    /**
-//     * Returns the selectedPiece
-//     * @return returns the selectedPiece
-//     */
-//    public Piece getSelectedPiece() {
-//        return this.selectedPiece;
-//    }
+    /**
+     * Returns the selectedPiece
+     * @return returns the selectedPiece
+     */
+    public Piece getSelectedPiece() {
+        return this.selectedPiece;
+    }
 
     /**
      * Returns the size of the game board
@@ -164,7 +164,7 @@ public class Board {
      * @param endTile the end tile
      */
     protected void movePiece(Tile endTile) {
-        if (this.startTile != null && this.selectedPiece != null) {
+
             // Find start and end coordinates
             int startX = -1, startY = -1, endX = -1, endY = -1;
             for (int x = 0; x < tiles.length; x++) {
@@ -199,7 +199,7 @@ public class Board {
             } else {
                 System.out.println("Invalid Move, not executed");
             }
-        }
+
         // Reset startTile and selectedPiece after the move
         this.startTile = null;
         this.selectedPiece = null;
